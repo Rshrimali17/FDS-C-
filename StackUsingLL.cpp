@@ -1,3 +1,6 @@
+// Stack using Linked List
+// This list just points to the previous node (efficient).
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -37,7 +40,7 @@ int main(){
                     cout << "=> Stack is empty." << endl;
                 }
                 else{
-                    cout << "Top element is '" << last->data << "'." << endl;
+                    cout << "=> Top element is '" << last->data << "'." << endl;
                 }
                 break;
 
