@@ -154,7 +154,7 @@ class withoutUsingPointer{
                 j ++ ;
             }
             str2[j] = '\0';
-            cout << "Reverse of string (without using pointers) '" << str1 << "' is '" << str2 << ".\n";
+            cout << "Reverse of string (without using pointers) '" << str1 << "' is '" << str2 << "'.\n";
         }
 };
 
@@ -253,7 +253,7 @@ int main(){
             case 15:
                 // reverse with ptr
                 withPointer.reverse(str1, str2);
-                cout << "Reverse of string (using pointers) '" << str1 << "' is '" << str2 << ".\n";
+                cout << "Reverse of string (using pointers) '" << str1 << "' is '" << str2 << "'.\n";
                 break;
             
         }

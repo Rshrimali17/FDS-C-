@@ -10,7 +10,7 @@ int main (){
     cin >> noOfRows;
     cout << "Enter number of columns : ";
     cin >> noOfColumns;
-    int sparse[noOfRows][3], count = 0, num;
+    int sparse[15][3], count = 1, num;
 
     for (int i = 0; i < noOfRows; i++){
         for (int j = 0; j < noOfColumns; j++){
@@ -25,7 +25,7 @@ int main (){
     }
 
 
-    int transpose[noOfRows][3], method;
+    int transpose[15][3], method;
     cout << "Enter Method for transpose : \n1 : Simple method \n2 : Fast method" << endl;
     cin >> method;
 
@@ -55,8 +55,7 @@ int main (){
         int storeIndex[noOfColumns], arr[noOfColumns];
         
         // removing garbage values
-        for (int i = 0; i < count; i++)
-        {
+        for (int i = 0; i < count; i++){
             storeIndex[i] = 0;
         }
         

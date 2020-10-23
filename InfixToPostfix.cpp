@@ -1,3 +1,105 @@
+// #include<bits/stdc++.h>
+// using namespace std;
+
+// stack <char> s;
+
+
+// int priority(char oper){
+//     if(oper == '+' || oper == '-'){
+//         return (1);
+//     }
+
+//     if(oper == '*' || oper == '/'){
+//         return (2);
+//     }
+
+//     if(oper == '^'){
+//         return (3);
+//     }
+
+//     return 0;
+// }
+
+
+// string convert(string infix){
+//     int i = 0;
+//     string postfix = "";
+
+//     while(infix[i] != '\0'){
+//         // cout << infix[i] << endl;
+//         // cout << postfix << endl;
+//         if(infix[i] >= 'A' && infix[i] <= 'Z' || infix[i] >= 'a' && infix[i] <= 'z'){
+//             postfix += infix[i]; 
+//         }
+//         else if(infix[i] == ')'){
+//             while(s.top() != '('){
+//                 postfix += s.top();
+//                 s.pop();
+//             }
+//             s.pop();
+//         }
+//         else if(infix[i] == ']'){
+//             while(s.top() != '['){
+//                 postfix += s.top();
+//                 s.pop();
+//             }
+//             s.pop();
+//         }
+//         else if(infix[i] == '}'){
+//             while(s.top() != '{'){
+//                 postfix += s.top();
+//                 s.pop();
+//             }
+//             s.pop();
+//         }
+//         else{
+//             if(s.empty()){
+//                 s.push(infix[i]);
+//             }
+//             else{
+//                 // if(priority(infix[i]) > priority(s.top())){
+//                 //     s.push(infix[i]);
+//                 // }
+//                 // else{
+//                 //     while(!s.empty()){
+//                 //         postfix += s.top();
+//                 //         s.pop();
+//                 //     }
+//                 //     s.push(infix[i]);
+//                 // }
+//                 while(priority(infix[i]) <= priority(s.top())){
+//                     postfix += s.top();
+//                     s.pop();
+//                     if(s.empty()){
+//                         break;
+//                     }
+//                 }
+//                 s.push(infix[i]);
+//             }
+//         }
+// //  || s.top() == '(' || s.top() == '{' || s.top() == '['
+//         i ++;
+//     }
+//     while(!s.empty()){
+//         postfix += s.top();
+//         s.pop();
+//     }
+
+//     return postfix;
+// }
+
+
+// int main(){
+//     string infix, postfix;
+//     cin >> infix;
+//     // cout << infix;
+//     postfix = convert(infix);
+//     cout << postfix;
+// }
+
+
+
+
 #include <iostream>
 using namespace std;
 
@@ -20,8 +122,6 @@ bool allNotDone(Process *index, int noOfProcess);
 void RR(Process *index, int noOfProcess, int timeQuan);
 void FCFS(Process *index, int noOfProcess);
 void SJF(Process *index, int noOfProcess);
-int isNewReadySTCF(Process *index, int noOfProcess, int time, Process *current);
-void STCF(Process *index, int noOfProcess);
 void giveSpaces(int count);
 void displayTable(Process *index, int noOfProcess);
 
@@ -252,72 +352,6 @@ void SJF(Process *index, int noOfProcess){
 }
 
 
-int isNewReadySTCF(Process *index, int noOfProcess, int time, Process *current){
-    int newIndex = -1;
-
-    for (int i = 0; i < noOfProcess; i++){
-        if (index->notDone){
-            if (index->newArrivvalTime <= time){
-                if(index->burstLeft < current->burstLeft){
-                    newIndex = i;
-                    break;
-                }
-            }
-            
-        }
-        index += 1;
-    }
-    return newIndex;
-    
-}
-
-
-void STCF(Process *index, int noOfProcess){
-    int time = 0, gotFirst = -1;
-    while(gotFirst == -1){
-        gotFirst = findShortestSJF(index, noOfProcess, time);
-        if(gotFirst == -1){
-            time += 1;
-        }
-    }
-
-    
-    while (allNotDone(index, noOfProcess)){
-        Process *temp = index;
-        temp += gotFirst;
-        gotFirst = isNewReadySTCF(index, noOfProcess, time, temp);
-        if(gotFirst != -1){
-            continue;
-        }
-
-
-        temp->burstLeft -= 1;
-        time += 1;
-    cout << "exec " << temp->name << endl;
-        if (temp->burstLeft == 0){
-            temp->exitTime = time;
-            temp->notDone = false;
-
-            if(allNotDone(index, noOfProcess)){
-                gotFirst = -1;
-                while(gotFirst == -1){
-                    gotFirst = findShortestSJF(index, noOfProcess, time);
-                    if(gotFirst == -1){
-                        time += 1;
-                    }
-                }
-            }
-
-        }
-
-        
-        
-    }
-    
-
-}
-
-
 void giveSpaces(int count){
     for (int i = 0; i < count; i++){
         cout << " ";
@@ -349,93 +383,9 @@ void displayTable(Process *index, int noOfProcess){
     float avgTAT = totalTAT/noOfProcess;
     float avgWaiting = totalWaiting/noOfProcess;
 
-    cout << "\nAvg turn around time = " << avgTAT << endl;
-    cout << "Avg waiting time = " << avgWaiting << endl << endl << endl;
+    cout << "Avg turn around time = " << avgTAT << endl;
+    cout << "Avg waiting time = " << avgWaiting << endl;
     
 }
 
 
-
-
-
-
-// mainArr[0].name = "a";
-    // mainArr[0].arrivalTime = 3;
-    // mainArr[0].burstTime = 4;
-    // mainArr[0].burstLeft = mainArr[0].burstTime;
-    // mainArr[0].newArrivvalTime = mainArr[0].arrivalTime;
-
-    // // mainArr[0].name = "A";
-    // mainArr[1].arrivalTime = 5;
-    // mainArr[1].burstTime = 3;
-    // mainArr[1].burstLeft = mainArr[1].burstTime;
-    // mainArr[1].newArrivvalTime = mainArr[1].arrivalTime;
-
-    // // mainArr[0].name = "A";
-    // mainArr[2].arrivalTime = 0;
-    // mainArr[2].burstTime = 2;
-    // mainArr[2].burstLeft = mainArr[2].burstTime;
-    // mainArr[2].newArrivvalTime = mainArr[2].arrivalTime;
-
-    // // mainArr[0].name = "A";
-    // mainArr[3].arrivalTime = 5;
-    // mainArr[3].burstTime = 1;
-    // mainArr[3].burstLeft = mainArr[3].burstTime;
-    // mainArr[3].newArrivvalTime = mainArr[3].arrivalTime;
-
-    // // mainArr[0].name = "A";
-    // mainArr[4].arrivalTime = 4;
-    // mainArr[4].burstTime = 3;
-    // mainArr[4].burstLeft = mainArr[4].burstTime;
-    // mainArr[4].newArrivvalTime = mainArr[4].arrivalTime;
-
-
-        // mainArr[0].name = "a";
-    // mainArr[0].arrivalTime = 0;
-    // mainArr[0].burstTime = 5;
-    // mainArr[0].burstLeft = mainArr[0].burstTime;
-    // mainArr[0].newArrivvalTime = mainArr[0].arrivalTime;
-
-    // // mainArr[0].name = "A";
-    // mainArr[1].arrivalTime = 1;
-    // mainArr[1].burstTime = 3;
-    // mainArr[1].burstLeft = mainArr[1].burstTime;
-    // mainArr[1].newArrivvalTime = mainArr[1].arrivalTime;
-
-    // // mainArr[0].name = "A";
-    // mainArr[2].arrivalTime = 2;
-    // mainArr[2].burstTime = 1;
-    // mainArr[2].burstLeft = mainArr[2].burstTime;
-    // mainArr[2].newArrivvalTime = mainArr[2].arrivalTime;
-
-    // // mainArr[0].name = "A";
-    // mainArr[3].arrivalTime = 3;
-    // mainArr[3].burstTime = 2;
-    // mainArr[3].burstLeft = mainArr[3].burstTime;
-    // mainArr[3].newArrivvalTime = mainArr[3].arrivalTime;
-
-    // // mainArr[0].name = "A";
-    // mainArr[4].arrivalTime = 4;
-    // mainArr[4].burstTime = 3;
-    // mainArr[4].burstLeft = mainArr[4].burstTime;
-    // mainArr[4].newArrivvalTime = mainArr[4].arrivalTime;
-
-
-
-
-    // mainArr[0].arrivalTime = 5;
-    // mainArr[0].burstTime = 100;
-    // mainArr[0].burstLeft = mainArr[0].burstTime;
-    // mainArr[0].newArrivvalTime = mainArr[0].arrivalTime;
-
-    // // mainArr[0].name = "A";
-    // mainArr[1].arrivalTime = 10;
-    // mainArr[1].burstTime = 10;
-    // mainArr[1].burstLeft = mainArr[1].burstTime;
-    // mainArr[1].newArrivvalTime = mainArr[1].arrivalTime;
-
-    // // mainArr[0].name = "A";
-    // mainArr[2].arrivalTime = 30;
-    // mainArr[2].burstTime = 10;
-    // mainArr[2].burstLeft = mainArr[2].burstTime;
-    // mainArr[2].newArrivvalTime 

@@ -1,4 +1,6 @@
-// Assignment 4 probably
+// Singly linked list
+// Data : Name, department, int(Id, salary)
+// It also verifies if ids are not repeated
 
 #include<iostream>
 #include<string>
@@ -7,6 +9,7 @@ using namespace std;
 typedef struct employee{   
    string name;
    int id;
+   string dept;
    int salaray;
    struct employee *next;
 }Node;
@@ -107,6 +110,9 @@ Node *accept(Node *first){
       a->id = tempId;
       cout << "    Enter Name : ";
       cin >> a->name;
+
+      cout << "    Enter Department : ";
+      cin >> a->dept;
       
       cout << "    Enter salaray : ";
       cin >> a->salaray;
@@ -223,6 +229,11 @@ void recDisplayRev(Node *first){
       while (str.length() < 31){
          str += " ";
       }
+
+      str += first->dept;
+      while (str.length() < 48){
+         str += " ";
+      }
       
       str += to_string(first->salaray);
       cout << str << endl;
@@ -235,7 +246,7 @@ void display(Node *first, bool reverse){
       cout << "\n    List is Empty.\n";
    }
    else{
-      cout << "\n\n    Id     Name                Salary" << endl;
+      cout << "\n\n    Id     Name                Department       Salary" << endl;
       if (reverse){
          recDisplayRev(first);
       }
@@ -252,6 +263,11 @@ void display(Node *first, bool reverse){
             while (str.length() < 31){
                str += " ";
             }
+
+            str += temp->dept;
+            while (str.length() < 48){
+               str += " ";
+            }
             
             str += to_string(temp->salaray);
             cout << str << endl;
@@ -265,7 +281,7 @@ void display(Node *first, bool reverse){
 
 void searchId(Node *first){
    int search;
-   cout << "\n    Enter Id : ";
+   cout << "\n    Enter Id    : ";
    cin >> search;
    int getIndex = checkId(first, search);
 
@@ -276,8 +292,9 @@ void searchId(Node *first){
       for (int i = 0; i < getIndex; i++){
          first = first->next;
       }
-      cout << "    Name   : " << first->name << endl;
-      cout << "    Salary : " << first->salaray <<endl;
+      cout << "    Name       : " << first->name << endl;
+      cout << "    Department : " << first->dept << endl;
+      cout << "    Salary     : " << first->salaray <<endl;
    }
    
 
