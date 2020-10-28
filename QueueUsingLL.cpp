@@ -1,4 +1,4 @@
-// Queue using Linked List;
+// Queue using LinkedList;
 // Variable last is maintaied to add a new node in O(1) in the list;
 
 #include <bits/stdc++.h>

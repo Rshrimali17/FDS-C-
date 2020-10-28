@@ -1,6 +1,6 @@
 // Assignment 3
 
-#include <iostream>
+#include <bits/stdc++.h>
 #include<string>
 using namespace std;
 
@@ -113,6 +113,7 @@ void deleteRecord(studentData *index, int count){
 
 int main(){
     struct studentData arr[30];
+    vector <studentData> abc;
 
     arr[0].name = "Shlok Zanwar";
     arr[0].roll_no = 1;

@@ -42,34 +42,34 @@ int main(){
 
         switch (choice)
         {
-        case 1:
-            if(rearIndex < 29){
-                insertToQueue(arr, rearIndex+1);
-                rearIndex ++;
-            }
-            else{
-                cout << "\nQueue is full" << endl;
-            }
-            break;
+            case 1:
+                if(rearIndex < 29){
+                    insertToQueue(arr, rearIndex+1);
+                    rearIndex ++;
+                }
+                else{
+                    cout << "\nQueue is full" << endl;
+                }
+                break;
 
-        case 2:
-            if(frontIndex > rearIndex){
-                cout << "\nQueue is already empty." << endl;
-            }
-            else{
-                frontIndex ++ ;
-            }
-            break;
+            case 2:
+                if(frontIndex > rearIndex){
+                    cout << "\nQueue is already empty." << endl;
+                }
+                else{
+                    frontIndex ++ ;
+                }
+                break;
 
-        case 3:
-            printQueue(arr, frontIndex, rearIndex);
-            break;
-        
-        default:
-            if(choice != 0){
-                cout << "\nInvalid Choice";
-            }
-            break;
+            case 3:
+                printQueue(arr, frontIndex, rearIndex);
+                break;
+            
+            default:
+                if(choice != 0){
+                    cout << "\nInvalid Choice";
+                }
+                break;
         }
 
         if(frontIndex > rearIndex){
